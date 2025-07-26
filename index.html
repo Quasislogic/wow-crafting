@@ -114,19 +114,19 @@
 
         const table = $('#craftTable').DataTable({
           data: data,
-          columns: [
-            {
-              title: 'Profession',
-              data: 'Profession',
-              render: function(data) {
-                const icon = professionIcons[data] || '';
-                return icon ? `<img class="icon" src="${icon}" alt="">${data}` : data;
-              }
-            },
-            { title: 'Gear Slot', data: 'Gear Slot' },
-            { title: 'Item', data: 'Item' },
-            { title: 'Crafter', data: 'Crafter' }
-          ],
+columns: [
+  {
+    title: 'Profession',
+    data: 'Profession',
+    render: function(data) {
+      const icon = professionIcons[data] || '';
+      return icon ? `<img class="icon" src="${icon}" alt="">${data}` : data;
+    }
+  },
+  { title: 'Gear Slot', data: 'Gear Slot' },
+  { title: 'Item Name', data: 'Item Name' },    
+  { title: 'Crafter(s)', data: 'Crafter(s)' }    
+]
           pageLength: 25
         });
 
