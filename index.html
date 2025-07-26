@@ -10,7 +10,7 @@
   <style>
     body {
       font-family: 'Georgia', serif;
-      background: url('https://wow.zamimg.com/uploads/screenshots/normal/299439.jpg') center center / cover no-repeat fixed; /* parchment style */
+      background: url('https://i.imgur.com/C3wJz3Y.jpg') center center / cover no-repeat fixed; /* parchment style */
       color: #3e2b1c;
       margin: 0;
       padding: 40px 20px;
@@ -114,19 +114,19 @@
 
         const table = $('#craftTable').DataTable({
           data: data,
-columns: [
-  {
-    title: 'Profession',
-    data: 'Profession',
-    render: function(data) {
-      const icon = professionIcons[data] || '';
-      return icon ? `<img class="icon" src="${icon}" alt="">${data}` : data;
-    }
-  },
-  { title: 'Gear Slot', data: 'Gear Slot' },
-  { title: 'Item Name', data: 'Item Name' },    
-  { title: 'Crafter(s)', data: 'Crafter(s)' }    
-]
+          columns: [
+            {
+              title: 'Profession',
+              data: 'Profession',
+              render: function(data) {
+                const icon = professionIcons[data] || '';
+                return icon ? `<img class="icon" src="${icon}" alt="">${data}` : data;
+              }
+            },
+            { title: 'Gear Slot', data: 'Gear Slot' },
+            { title: 'Item/Enchant Name', data: 'Item/Enchant Name' },
+            { title: 'Crafter(s)', data: 'Crafter(s)' }
+          ],
           pageLength: 25
         });
 
