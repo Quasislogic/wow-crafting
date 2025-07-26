@@ -11,7 +11,7 @@
   <style>
     body {
       font-family: 'IM Fell English', serif;
-      background: url('https://www.wowinterface.com/forums/attachment.php?attachmentid=9871&stc=1&d=1311256765') center center / cover no-repeat fixed;
+      background: url('https://images2.minutemediacdn.com/image/upload/c_crop,w_3840,h_2160,x_0,y_0/c_fill,w_720,ar_16:9,f_auto,q_auto,g_auto/images/voltaxMediaLibrary/mmsport/esports_illustrated/01jec999y62g4467fykv.jpg') center center / cover no-repeat fixed;
       color: #3e2b1c;
       margin: 0;
       padding: 40px 20px;
@@ -34,13 +34,20 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      justify-content: center;
+      justify-content: space-between;
+      align-items: center;
       position: sticky;
       top: 0;
       z-index: 10;
     }
 
-    select {
+    #filter-left, #filter-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    select, input[type="search"] {
       padding: 6px 10px;
       font-size: 16px;
       border: 1px solid #a98250;
@@ -94,17 +101,30 @@
       table {
         font-size: 12px;
       }
+      #filter-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      #filter-left, #filter-right {
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>✨ Psycraft</h1>
+  <h1>Psycraft</h1>
 
   <div id="filter-container">
-    <label for="professionFilter">Filter by Profession: </label>
-    <select id="professionFilter">
-      <option value="">All</option>
-    </select>
+    <div id="filter-left">
+      <label for="professionFilter">Profession:</label>
+      <select id="professionFilter">
+        <option value="">All</option>
+      </select>
+    </div>
+    <div id="filter-right">
+      <label for="globalSearch">Search:</label>
+      <input type="search" id="globalSearch" placeholder="Search items...">
+    </div>
   </div>
 
   <table id="craftTable" class="display"></table>
@@ -168,12 +188,17 @@
             { title: 'Item/Enchant Name', data: 'Item/Enchant Name' },
             { title: 'Crafter(s)', data: 'Crafter(s)' }
           ],
-          pageLength: 25
+          pageLength: 25,
+          dom: 't' // hide built-in filter input
         });
 
         $('#professionFilter').on('change', function() {
           const val = this.value;
           table.column(0).search(val).draw();
+        });
+
+        $('#globalSearch').on('keyup', function() {
+          table.search(this.value).draw();
         });
       }
     });
