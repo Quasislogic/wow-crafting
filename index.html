@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <title>WoW Crafting Table</title>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <style>
     body {
-      font-family: 'Georgia', serif;
-      background: url('https://www.google.co.uk/imgres?q=psylocke%20background%20website&imgurl=https%3A%2F%2Fimages2.minutemediacdn.com%2Fimage%2Fupload%2Fc_crop%2Cw_3840%2Ch_2160%2Cx_0%2Cy_0%2Fc_fill%2Cw_720%2Car_16%3A9%2Cf_auto%2Cq_auto%2Cg_auto%2Fimages%2FvoltaxMediaLibrary%2Fmmsport%2Fesports_illustrated%2F01jec999y62g4467fykv.jpg&imgrefurl=https%3A%2F%2Fwww.si.com%2Fesports%2Fmarvel-rivals-skin-tier-list-incognito-dolphin-jeff-mcu-costumes-01jf4vpwff2e&docid=jcjCRKTcNTbfZM&tbnid=VPuoWkOaKP6WxM&vet=12ahUKEwjss5e11duOAxWSUUEAHZpqJQoQM3oECBwQAA..i&w=720&h=405&hcb=2&ved=2ahUKEwjss5e11duOAxWSUUEAHZpqJQoQM3oECBwQAA') center center / cover no-repeat fixed; /* parchment style */
+      font-family: 'IM Fell English', serif;
+      background: url('https://www.wowinterface.com/forums/attachment.php?attachmentid=9871&stc=1&d=1311256765') center center / cover no-repeat fixed;
       color: #3e2b1c;
       margin: 0;
       padding: 40px 20px;
@@ -18,15 +19,25 @@
 
     h1 {
       text-align: center;
-      color: #6b4c1e;
+      color: #f9b233;
       margin-bottom: 30px;
       font-size: 32px;
       text-shadow: 1px 1px 0 #fff8dc;
     }
 
     #filter-container {
-      text-align: center;
+      background: rgba(0,0,0,0.2);
+      border: 2px solid #a98250;
+      padding: 15px;
+      border-radius: 8px;
       margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     select {
@@ -43,6 +54,7 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      overflow-x: auto;
     }
 
     table.dataTable th {
@@ -64,6 +76,8 @@
 
     table.dataTable tr:hover {
       background-color: #e6dbb6;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
 
     .icon {
@@ -72,10 +86,19 @@
       vertical-align: middle;
       margin-right: 6px;
     }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      table {
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Psycraft</h1>
+  <h1>✨ Psycraft</h1>
 
   <div id="filter-container">
     <label for="professionFilter">Filter by Profession: </label>
@@ -100,6 +123,18 @@
       'Inscription': 'https://wow.zamimg.com/images/wow/icons/large/trade_inscription.jpg'
     };
 
+    const gearIcons = {
+      'Helm': 'https://wow.zamimg.com/images/wow/icons/large/inv_helmet_06.jpg',
+      'Shoulders': 'https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_02.jpg',
+      'Back': 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_cape_11.jpg',
+      'Chest': 'https://wow.zamimg.com/images/wow/icons/large/inv_chest_cloth_17.jpg',
+      'Wrists': 'https://wow.zamimg.com/images/wow/icons/large/inv_bracer_17.jpg',
+      'Hands': 'https://wow.zamimg.com/images/wow/icons/large/inv_gauntlets_17.jpg',
+      'Waist': 'https://wow.zamimg.com/images/wow/icons/large/inv_belt_15.jpg',
+      'Legs': 'https://wow.zamimg.com/images/wow/icons/large/inv_pants_cloth_21.jpg',
+      'Feet': 'https://wow.zamimg.com/images/wow/icons/large/inv_boots_05.jpg'
+    };
+
     Papa.parse(sheetCSV, {
       download: true,
       header: true,
@@ -107,7 +142,6 @@
         const data = results.data;
         const professions = [...new Set(data.map(row => row.Profession).filter(p => p))].sort();
 
-        // populate dropdown
         professions.forEach(p => {
           $('#professionFilter').append(`<option value="${p}">${p}</option>`);
         });
@@ -123,7 +157,14 @@
                 return icon ? `<img class="icon" src="${icon}" alt="">${data}` : data;
               }
             },
-            { title: 'Gear Slot', data: 'Gear Slot' },
+            {
+              title: 'Gear Slot',
+              data: 'Gear Slot',
+              render: function(data) {
+                const icon = gearIcons[data] || '';
+                return icon ? `<img class="icon" src="${icon}" alt="">${data}` : data;
+              }
+            },
             { title: 'Item/Enchant Name', data: 'Item/Enchant Name' },
             { title: 'Crafter(s)', data: 'Crafter(s)' }
           ],
