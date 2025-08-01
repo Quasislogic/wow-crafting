@@ -1,4 +1,4 @@
-const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT8pMucB93x3Tc3qb1SDJKdg4-LYbd8qGnDKLCtdRRZgY_BkJ3w0AGM8-qOF0KQv5jZAG1uqv2E66ce/pub?gid=1592321778&single=true&output=csv';
+const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQUgbmLaIQcadhPZSGf2nUBoSOhvcqMMoU0DPWlRUKmRrYHYtXsvWxGgqhWRjqpakry4VBTB2CHtMen/pub?gid=1592321778&single=true&output=csv';
 
 const professionIcons = {
   'Blacksmithing': 'https://wow.zamimg.com/images/wow/icons/large/trade_blacksmithing.jpg',
