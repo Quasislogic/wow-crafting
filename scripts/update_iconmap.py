@@ -7,7 +7,7 @@ import tempfile
 
 # --- CONFIGURATION ---
 google_sheet_csv_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQUgbmLaIQcadhPZSGf2nUBoSOhvcqMMoU0DPWlRUKmRrYHYtXsvWxGgqhWRjqpakry4VBTB2CHtMen/pub?gid=1592321778&single=true&output=csv"
-iconmap_path = r"C:\Users\James\IconMap.js"
+iconmap_path = os.path.join(os.path.dirname(__file__), "../IconMap.js")
 
 # --- STEP 1: Download and parse texture IDs from Google Sheet column G ---
 print("[*] Downloading Google Sheet CSV...")
