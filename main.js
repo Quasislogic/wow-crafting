@@ -106,13 +106,26 @@ Papa.parse(sheetCSV, {
           }
         },
         {
-          title: 'Item/Enchant Name',
-          data: null,
-          render: function(row) {
-            const name = row["Item/Enchant Name"];
-            const id = row["Spell ID"];
-            if (!id) return name;
-            return `<a href="https://www.wowhead.com/mop-classic/spell=${id}" data-wowhead="spell=${id}" class="wowhead-link">${name}</a>`;
+          {
+  title: 'Item/Enchant Name',
+  data: null,
+  render: function(row) {
+    const name = row["Item/Enchant Name"];
+    const id = row["Spell ID"];
+    const icon = row["Icon"]; // From your CSV (e.g. "inv_misc_rune_05")
+
+    const iconImg = icon
+      ? `<img src="https://wow.zamimg.com/images/wow/icons/medium/${icon}.jpg" class="icon" alt="" style="margin-right:4px; vertical-align:middle;">`
+      : '';
+
+    const displayName = id
+      ? `<a href="https://www.wowhead.com/mop-classic/spell=${id}" data-wowhead="spell=${id}" class="wowhead-link">${name}</a>`
+      : name;
+
+    return iconImg + displayName;
+  }
+}
+
           }
         },
         {
