@@ -115,9 +115,11 @@ Papa.parse(sheetCSV, {
     const id = row["Spell ID"];
     const icon = row["Icon"];
 
-    const iconImg = icon
-      ? `<img src="https://wow.zamimg.com/images/wow/icons/medium/${icon}.jpg" class="icon" alt="" style="margin-right:4px; vertical-align:middle;">`
-      : '';
+const iconName = iconMap[icon];
+const iconImg = iconName
+  ? `<img src="https://wow.zamimg.com/images/wow/icons/medium/${iconName}.jpg" class="icon" alt="" style="margin-right:4px; vertical-align:middle;">`
+  : '';
+
 
     const displayName = id
       ? `<a href="https://www.wowhead.com/mop-classic/spell=${id}" data-wowhead="spell=${id}" class="wowhead-link">${name}</a>`
@@ -255,4 +257,5 @@ Papa.parse(sheetCSV, {
     });
   }
 });
+
 
