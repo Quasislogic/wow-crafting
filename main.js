@@ -1,3 +1,5 @@
+import { iconMap } from './IconMap.js';
+
 const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQUgbmLaIQcadhPZSGf2nUBoSOhvcqMMoU0DPWlRUKmRrYHYtXsvWxGgqhWRjqpakry4VBTB2CHtMen/pub?gid=1592321778&single=true&output=csv';
 
 const professionIcons = {
@@ -253,3 +255,4 @@ Papa.parse(sheetCSV, {
     });
   }
 });
+
