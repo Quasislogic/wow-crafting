@@ -113,7 +113,7 @@ Papa.parse(sheetCSV, {
   render: function(row) {
     const name = row["Item/Enchant Name"];
     const id = row["Spell ID"];
-    const icon = Number(row["Icon"]); // 🔥 FIX: ensure it's a number
+    const icon = Number(row["Texture ID"]); // 🔥 FIX: ensure it's a number
 
     const iconName = iconMap[icon];
     const iconImg = iconName
@@ -257,6 +257,7 @@ Papa.parse(sheetCSV, {
     });
   }
 });
+
 
 
 
