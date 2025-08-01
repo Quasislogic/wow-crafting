@@ -105,14 +105,13 @@ Papa.parse(sheetCSV, {
             return icon ? `<img class="icon" src="${icon}" alt="">${data}` : data;
           }
         },
-        {
-          {
+{
   title: 'Item/Enchant Name',
   data: null,
   render: function(row) {
     const name = row["Item/Enchant Name"];
     const id = row["Spell ID"];
-    const icon = row["Icon"]; // From your CSV (e.g. "inv_misc_rune_05")
+    const icon = row["Icon"];
 
     const iconImg = icon
       ? `<img src="https://wow.zamimg.com/images/wow/icons/medium/${icon}.jpg" class="icon" alt="" style="margin-right:4px; vertical-align:middle;">`
@@ -124,14 +123,11 @@ Papa.parse(sheetCSV, {
 
     return iconImg + displayName;
   }
+},
+{
+  title: 'Crafter(s)',
+  data: 'Crafter(s)'
 }
-
-          }
-        },
-        {
-          title: 'Crafter(s)',
-          data: 'Crafter(s)'
-        }
       ],
       columnDefs: [
         { targets: 0, orderable: false, width: '5%' },
