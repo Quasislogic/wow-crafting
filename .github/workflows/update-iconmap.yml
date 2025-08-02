@@ -2,8 +2,7 @@ name: Update IconMap.js
 
 on:
   workflow_dispatch:  # Allow manual trigger in GitHub UI
-  schedule:
-    - cron: '0 6 * * *'  # Optional: run daily at 6am UTC
+
 
 jobs:
   update-iconmap:
