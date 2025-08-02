@@ -1,6 +1,29 @@
 import { iconMap } from './IconMap.js';
 
 const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQUgbmLaIQcadhPZSGf2nUBoSOhvcqMMoU0DPWlRUKmRrYHYtXsvWxGgqhWRjqpakry4VBTB2CHtMen/pub?gid=1592321778&single=true&output=csv';
+const invTypeMap = {
+  INVTYPE_HEAD: 'Helm',
+  INVTYPE_SHOULDER: 'Shoulders',
+  INVTYPE_CLOAK: 'Back',
+  INVTYPE_CHEST: 'Chest',
+  INVTYPE_WRIST: 'Wrists',
+  INVTYPE_HAND: 'Hands',
+  INVTYPE_WAIST: 'Waist',
+  INVTYPE_LEGS: 'Legs',
+  INVTYPE_FEET: 'Boots',
+  INVTYPE_2HWEAPON: 'Main Hand',
+  INVTYPE_WEAPON: 'Main Hand',
+  INVTYPE_WEAPONMAINHAND: 'Main Hand',
+  INVTYPE_WEAPONOFFHAND: 'Off-hand',
+  INVTYPE_HOLDABLE: 'Off-hand',
+  INVTYPE_SHIELD: 'Off-hand',
+  INVTYPE_FINGER: 'Ring',
+  INVTYPE_NECK: 'Neck', // Optional, not currently used
+  INVTYPE_TRINKET: 'Trinket', // Optional
+  INVTYPE_RANGED: 'Ranged', // Optional
+  INVTYPE_THROWN: 'Ranged', // Optional
+  INVTYPE_NON_EQUIP_IGNORE: '',
+};
 
 const professionIcons = {
   'Blacksmithing': 'https://wow.zamimg.com/images/wow/icons/large/trade_blacksmithing.jpg',
@@ -81,6 +104,11 @@ Papa.parse(sheetCSV, {
 
 // Group by: Profession + Item/Enchant Name + Item ID + Spell ID
 const grouped = {};
+    raw.forEach(row => {
+  const invType = row["Item Type"];
+  row["Item Type"] = invTypeMap[invType] || invType; // fallback to original if unmapped
+});
+
 raw.forEach(row => {
   const key = `${row["Profession"]}|${row["Item/Enchant Name"]}|${row["Item ID"]}|${row["Spell ID"]}`;
 
@@ -278,6 +306,7 @@ const data = Object.values(grouped).map(row => ({
     });
   }
 });
+
 
 
 
