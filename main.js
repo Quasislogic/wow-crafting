@@ -77,7 +77,28 @@ Papa.parse(sheetCSV, {
   download: true,
   header: true,
   complete: function(results) {
-    const data = results.data;
+    const raw = results.data;
+
+// Group by: Profession + Item/Enchant Name + Item ID + Spell ID
+const grouped = {};
+raw.forEach(row => {
+  const key = `${row["Profession"]}|${row["Item/Enchant Name"]}|${row["Item ID"]}|${row["Spell ID"]}`;
+
+  if (!grouped[key]) {
+    grouped[key] = { ...row };
+    grouped[key]["Crafter(s)"] = new Set(row["Crafter(s)"].split(',').map(s => s.trim()));
+  } else {
+    const crafters = row["Crafter(s)"].split(',').map(s => s.trim());
+    crafters.forEach(c => grouped[key]["Crafter(s)"].add(c));
+  }
+});
+
+// Final data array for DataTables
+const data = Object.values(grouped).map(row => ({
+  ...row,
+  "Crafter(s)": [...row["Crafter(s)"]].sort().join(', ')
+}));
+
     const table = $('#craftTable').DataTable({
       data: data,
       columns: [
@@ -257,6 +278,7 @@ Papa.parse(sheetCSV, {
     });
   }
 });
+
 
 
 
