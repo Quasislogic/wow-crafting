@@ -6,6 +6,7 @@ const invTypeMap = {
   INVTYPE_SHOULDER: 'Shoulders',
   INVTYPE_CLOAK: 'Back',
   INVTYPE_CHEST: 'Chest',
+  INVTYPE_ROBE: 'Chest',
   INVTYPE_WRIST: 'Wrists',
   INVTYPE_HAND: 'Hands',
   INVTYPE_WAIST: 'Waist',
@@ -20,9 +21,10 @@ const invTypeMap = {
   INVTYPE_FINGER: 'Ring',
   INVTYPE_NECK: 'Neck', // Optional, not currently used
   INVTYPE_TRINKET: 'Trinket', // Optional
-  INVTYPE_RANGED: 'Ranged', // Optional
+  INVTYPE_RANGEDRIGHT: 'Wand', // Optional
   INVTYPE_THROWN: 'Ranged', // Optional
-  INVTYPE_NON_EQUIP_IGNORE: '',
+  INVTYPE_NON_EQUIP_IGNORE: 'Misc',
+  INVTYPE_BAG: 'Bag',
 };
 
 const professionIcons = {
@@ -306,6 +308,7 @@ const data = Object.values(grouped).map(row => ({
     });
   }
 });
+
 
 
 
